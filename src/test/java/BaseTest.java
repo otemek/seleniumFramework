@@ -3,6 +3,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BaseTest {
 
@@ -11,6 +12,8 @@ public class BaseTest {
     @BeforeClass
     public static void setUp() {
         ChromeDriverManager.getInstance().setup();
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
         driver = new ChromeDriver();
     }
 

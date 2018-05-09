@@ -13,23 +13,26 @@ public class LoginPageTest extends BaseTest {
         loginPage.openPage();
     }
 
+    String loginAndReadMessage(String username, String password) {
+        return loginPage.login(username, password).getFlashMessage();
+    }
 
     @Test
     public void afterLoginShouldHaveSuccessMessage() {
-        loginPage.login("tomsmith","SuperSecretPassword!");
-        assertTrue(loginPage.getFlashMessage().contains("You logged into a secure area!"));
+        String actual = loginAndReadMessage("tomsmith", "SuperSecretPassword!");
+        assertTrue(actual.contains("You logged into a secure area!"));
     }
 
     @Test
     public void afterLoginShouldHaveErrorPasswordMessage() {
-        loginPage.login("tomsmith","WrongPassword");
-        assertTrue(loginPage.getFlashMessage().contains("Your password is invalid!"));
+        String actual = loginAndReadMessage("tomsmith", "WrongPassword");
+        assertTrue(actual.contains("Your password is invalid!"));
     }
 
     @Test
     public void afterLoginShoudlHaveErrorLoginMessage() {
-        loginPage.login("nonexistuser","SuperSecretPassword!");
-        assertTrue(loginPage.getFlashMessage().contains("Your username is invalid!"));
+        String actual = loginAndReadMessage("nonexistuser", "SuperSecretPassword!");
+        assertTrue(actual.contains("Your username is invalid!"));
     }
 
 }
